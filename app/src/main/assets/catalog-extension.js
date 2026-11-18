@@ -54,6 +54,7 @@
       </div>`;
     host.prepend(card);
     const grid = card.querySelector("#rrsm-product-grid");
+    const read = () => { try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}} };
     PRODUCTS.forEach(([id,label,unit]) => {
       const saved = read()[id] || {};
       const el = document.createElement("div");
@@ -63,7 +64,6 @@
         <div class="rr-price"><input id="rrsm-p-${id}" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Unit price" value="${saved.price || ""}"></div>`;
       grid.appendChild(el);
     });
-    const read = () => { try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}} };
     function collect(){
       const data={};
       PRODUCTS.forEach(([id])=>{
